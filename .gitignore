@@ -1,0 +1,10 @@
+# Dependencias
+node_modules/
+uploads/
+
+# Configuración local
+.env
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
