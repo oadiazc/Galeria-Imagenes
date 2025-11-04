@@ -7,11 +7,11 @@ const router = express.Router();
 
 // Configurar almacenamiento de Multer
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (req, file, cb) => { //guarda en la carpeta uploads
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    cb(null, Date.now() + path.extname(file.originalname)); //renombra la imagen por la fecha - evita duplicados
   }
 });
 

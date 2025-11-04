@@ -1,14 +1,14 @@
-const API_URL = "http://localhost:5000/api/images";
+const API_URL = "http://localhost:5000/api/images"; //llegan todas las peticiones del fetch
 
 async function cargarGaleria(categoria = "") {
   try {
-    const response = await fetch(API_URL);
-    const imagenes = await response.json();
+    const response = await fetch(API_URL); //optener imagenes 
+    const imagenes = await response.json(); //formayo json
     const contenedor = document.getElementById("galeria-container");
     contenedor.innerHTML = "";
 
     const filtradas = categoria ? imagenes.filter(img => img.categoria === categoria) : imagenes;
-
+//crear tarjetas y define el contenido
     filtradas.forEach(img => {
       const col = document.createElement("div");
       col.className = "col-md-4 mb-4";
@@ -72,4 +72,11 @@ async function mostrarDetalle(id) {
   document.getElementById("detalleImagen").src = `http://localhost:5000${img.url}`;
 }
 
-document.addEventListener("DOMContentLoaded", cargarGaleria);
+document.addEventListener("DOMContentLoaded", () => {
+  filtrarPorCategoria(""); // muestra todas por defecto
+
+  // Marcar el botón "Todas" como activo
+  const botones = document.querySelectorAll(".btn-outline-primary");
+  botones.forEach(btn => btn.classList.remove("active"));
+  botones[0].classList.add("active");
+});

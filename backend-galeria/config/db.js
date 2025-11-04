@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+import dotenv from "dotenv"; // carga de variables de entorno en .env para ser vistas en todo el proyecto
 
 dotenv.config();
 
@@ -14,3 +14,5 @@ const connectDB = async () => {
 };
 
 export default connectDB;
+
+//intenta conectarse a mongodb por medio de la url que esta en .env

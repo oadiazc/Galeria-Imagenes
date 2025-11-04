@@ -9,3 +9,25 @@ body {
 #galeria img:hover {
   transform: scale(1.05);
 }
+
+/* Inicio moderno */
+.inicio {
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.inicio h1 {
+  color: #1f1f1f;
+}
+
+.inicio p {
+  font-size: 1.1rem;
+}
+
+.inicio img {
+  max-width: 90%;
+  transition: transform 0.3s ease;
+}
+
+.inicio img:hover {
+  transform: scale(1.05);
+}

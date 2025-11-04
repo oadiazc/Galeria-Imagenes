@@ -1,7 +1,7 @@
 # Dependencias
 node_modules/
 uploads/
-
+img/
 # Configuración local
 .env
 

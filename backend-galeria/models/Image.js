@@ -4,10 +4,9 @@ const imageSchema = new mongoose.Schema({
   titulo: String,
   autor: String,
   descripcion: String,
-  categoria: String, // 🆕 nuevo campo
+  categoria: String,
   url: String
 });
 
-// 👇 aquí es donde puede estar el error
 export default mongoose.model('Image', imageSchema, 'imagenes');
 
