@@ -5,26 +5,24 @@ import Image from "../models/Image.js";
 
 const router = express.Router();
 
-// Configurar almacenamiento de Multer
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => { //guarda en la carpeta uploads
+  destination: (req, file, cb) => {
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); //renombra la imagen por la fecha - evita duplicados
+    cb(null, Date.now() + path.extname(file.originalname));
   }
 });
 
 const upload = multer({ storage });
 
-// 📤 Subir imagen
 router.post("/", upload.single("imagen"), async (req, res) => {
   try {
     const nuevaImagen = new Image({
       titulo: req.body.titulo,
       autor: req.body.autor,
       descripcion: req.body.descripcion,
-      categoria: req.body.categoria, // 🆕 se guarda
+      categoria: req.body.categoria,
       url: `/uploads/${req.file.filename}`
     });
 
@@ -36,8 +34,6 @@ router.post("/", upload.single("imagen"), async (req, res) => {
   }
 });
 
-
-// 📥 Obtener todas las imágenes
 router.get("/", async (req, res) => {
   try {
     const imagenes = await Image.find();
@@ -47,7 +43,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// 📄 Obtener una imagen por id (para el modal)
 router.get("/:id", async (req, res) => {
   try {
     const imagen = await Image.findById(req.params.id);
