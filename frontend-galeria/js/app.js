@@ -2,69 +2,48 @@ const API_URL = "http://localhost:5000/api/images";
 
 async function cargarGaleria(categoria = "") {
   try {
-    const response = await fetch(API_URL); 
+    const response = await fetch(API_URL);
     const imagenes = await response.json();
+
     const contenedor = document.getElementById("galeria-container");
     contenedor.innerHTML = "";
 
-    const filtradas = categoria ? imagenes.filter(img => img.categoria === categoria) : imagenes;
-    //crear tarjetas y define el contenido
+    const filtradas = categoria
+      ? imagenes.filter(img => img.categoria === categoria)
+      : imagenes;
+
     filtradas.forEach(img => {
       const col = document.createElement("div");
       col.className = "col-md-4 mb-4";
       col.innerHTML = `
         <div class="card h-100 shadow-sm">
-          <img src="http://localhost:5000${img.url}" class="card-img-top" alt="${img.titulo}">
+          <img src="http://localhost:5000${img.url}" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">${img.titulo}</h5>
-            <p class="card-text"><strong>Categoría:</strong> ${img.categoria}</p>
-            <p class="card-text text-muted">${img.autor}</p>
-            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#detalleModal" onclick="mostrarDetalle('${img._id}')">Ver más</button>
+            <h5>${img.titulo}</h5>
+            <p><strong>Categoría:</strong> ${img.categoria}</p>
+            <p class="text-muted">${img.autor}</p>
+            <button class="btn btn-primary w-100"
+                    data-bs-toggle="modal"
+                    data-bs-target="#detalleModal"
+                    onclick="mostrarDetalle('${img._id}')">
+              Ver más
+            </button>
           </div>
-        </div>
-      `;
+        </div>`;
       contenedor.appendChild(col);
     });
   } catch (error) {
-    console.error("Error al cargar imágenes:", error);
+    console.error("Error:", error);
   }
 }
 
-// Botones de filtro
-function filtrarPorCategoria(categoria) {
-  cargarGaleria(categoria);
+function filtrarPorCategoria(cat) {
+  cargarGaleria(cat);
 }
 
-document.addEventListener("DOMContentLoaded", () => cargarGaleria());
-
-
-// Subir imagen
-document.getElementById("formSubir").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      body: formData
-    });
-
-    if (response.ok) {
-      alert("✅ Imagen subida con éxito");
-      e.target.reset();
-      await cargarGaleria();
-    } else {
-      alert("❌ Error al subir imagen");
-    }
-  } catch (error) {
-    console.error("Error al subir imagen:", error);
-  }
-});
-
-// Mostrar detalle
 async function mostrarDetalle(id) {
-  const response = await fetch(`${API_URL}/${id}`);
-  const img = await response.json();
+  const res = await fetch(`${API_URL}/${id}`);
+  const img = await res.json();
 
   document.getElementById("detalleTitulo").innerText = img.titulo;
   document.getElementById("detalleDescripcion").innerText = img.descripcion;
@@ -72,10 +51,4 @@ async function mostrarDetalle(id) {
   document.getElementById("detalleImagen").src = `http://localhost:5000${img.url}`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  filtrarPorCategoria("");
-
-  const botones = document.querySelectorAll(".btn-outline-primary");
-  botones.forEach(btn => btn.classList.remove("active"));
-  botones[0].classList.add("active");
-});
+document.addEventListener("DOMContentLoaded", () => cargarGaleria());
