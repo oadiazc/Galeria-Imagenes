@@ -1,0 +1,60 @@
+<section id="galeria" class="container py-5">
+  <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+    <button type="button" [class.active]="categoriaSeleccionada() === ''"
+      [class.btn-primary]="categoriaSeleccionada() === ''" [class.btn-outline-primary]="categoriaSeleccionada() !== ''"
+      class="btn" (click)="filtrar('')">
+      Todas
+    </button>
+
+    <button type="button" [class.active]="categoriaSeleccionada() === 'Paisajes'"
+      [class.btn-primary]="categoriaSeleccionada() === 'Paisajes'"
+      [class.btn-outline-primary]="categoriaSeleccionada() !== 'Paisajes'" class="btn" (click)="filtrar('Paisajes')">
+      Paisajes
+    </button>
+
+    <button type="button" [class.active]="categoriaSeleccionada() === 'Personas'"
+      [class.btn-primary]="categoriaSeleccionada() === 'Personas'"
+      [class.btn-outline-primary]="categoriaSeleccionada() !== 'Personas'" class="btn" (click)="filtrar('Personas')">
+      Personas
+    </button>
+
+    <button type="button" [class.active]="categoriaSeleccionada() === 'Animales'"
+      [class.btn-primary]="categoriaSeleccionada() === 'Animales'"
+      [class.btn-outline-primary]="categoriaSeleccionada() !== 'Animales'" class="btn" (click)="filtrar('Animales')">
+      Animales
+    </button>
+
+    <button type="button" [class.active]="categoriaSeleccionada() === 'Arte Digital'"
+      [class.btn-primary]="categoriaSeleccionada() === 'Arte Digital'"
+      [class.btn-outline-primary]="categoriaSeleccionada() !== 'Arte Digital'" class="btn"
+      (click)="filtrar('Arte Digital')">
+      Arte Digital
+    </button>
+
+    <button type="button" [class.active]="categoriaSeleccionada() === 'Arquitectura'"
+      [class.btn-primary]="categoriaSeleccionada() === 'Arquitectura'"
+      [class.btn-outline-primary]="categoriaSeleccionada() !== 'Arquitectura'" class="btn"
+      (click)="filtrar('Arquitectura')">
+      Arquitectura
+    </button>
+  </div>
+
+  <div class="row g-4">
+    @if (cargando()) {
+    <div class="col-12 text-center">
+      <p class="text-muted">Cargando imágenes...</p>
+    </div>
+    } @else if (imagenes().length === 0) {
+    <div class="col-12 text-center">
+      <p class="text-muted">No hay imágenes en esta categoría</p>
+    </div>
+    } @else {
+    @for (imagen of imagenes(); track imagen._id) {
+    <div class="col-12 col-sm-6 col-md-4 col-lg-2-4" style="min-width: 0;">
+      <app-galeria-cards [imagen]="imagen">
+      </app-galeria-cards>
+    </div>
+    }
+    }
+  </div>
+</section>

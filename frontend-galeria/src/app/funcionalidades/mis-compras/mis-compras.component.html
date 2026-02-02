@@ -1,0 +1,57 @@
+<div class="container py-4">
+    <div class="page-container">
+        <!-- Header Section -->
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-2">
+                <i class="bi bi-bag-check-fill text-dark me-2"></i>
+                <span class="gradient-text">Mis Compras</span>
+            </h2>
+            <p class="lead text-muted">Historial de tus imágenes adquiridas</p>
+        </div>
+
+        @if (loading()) {
+        <div class="d-flex justify-content-center p-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+        } @else {
+        @if (compras().length === 0) {
+        <div class="empty-state">
+            <i class="bi bi-cart-dash display-1 mb-3 d-block"></i>
+            <h3 class="fw-bold">No has realizado ninguna compra</h3>
+            <p class="mb-4">¡Explora nuestra galería y encuentra la imagen perfecta para ti!</p>
+            <a routerLink="/galeria" class="btn btn-primary">
+                Ir a la Galería
+            </a>
+        </div>
+        } @else {
+        <div class="row g-4">
+            @for (orden of compras(); track orden._id) {
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <img [src]="orden.imagen.url" class="card-img-top" [alt]="orden.imagen.titulo">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold text-dark">{{ orden.imagen.titulo }}</h5>
+                        <p class="card-text text-muted small mb-3">
+                            <i class="bi bi-calendar-event me-1"></i>
+                            {{ orden.createdAt | date:'medium' }}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="badge bg-success px-3 py-2 rounded-pill">
+                                {{ orden.precio | currency:'USD' }}
+                            </span>
+                            <a [href]="orden.imagen.url" target="_blank"
+                                class="btn btn-primary btn-sm rounded-pill shadow-sm">
+                                <i class="bi bi-download me-1"></i> Descargar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
+        }
+    </div>
+</div>

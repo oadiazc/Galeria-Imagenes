@@ -1,0 +1,5 @@
+<app-menu-principal></app-menu-principal>
+<app-carrito-compra
+    *ngIf="!authService.currentUser() || authService.currentUser()?.rol !== 'admin'"></app-carrito-compra>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

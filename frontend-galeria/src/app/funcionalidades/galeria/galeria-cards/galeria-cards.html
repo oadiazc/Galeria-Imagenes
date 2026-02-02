@@ -1,0 +1,28 @@
+<div class="card card-imagen h-100 shadow-sm transition-card" (click)="abrirModal()" style="cursor: pointer;">
+  <div class="card-imagen-wrapper">
+    <img [src]="imagen.url" [alt]="imagen.titulo" class="card-img-top img-galeria"
+      [class.agotado-img]="imagen.stock === 0" />
+
+    <!-- Badge Agotado (Arriba a la derecha) -->
+    <span *ngIf="imagen.stock === 0" class="badge badge-agotado-top">AGOTADO</span>
+
+    <div class="overlay-info">
+      <span class="badge badge-categoria">{{ imagen.categoria }}</span>
+      <span class="badge badge-precio">${{ imagen.precio }}</span>
+
+      <!-- Botón de Favorito -->
+      <button class="btn-favorito" [class.activo]="favoritesService.esFavorito(imagen._id)"
+        (click)="toggleFavorito($event)">
+        <i class="bi" [class.bi-heart-fill]="favoritesService.esFavorito(imagen._id)"
+          [class.bi-heart]="!favoritesService.esFavorito(imagen._id)"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ imagen.titulo }}</h5>
+    <p class="card-text text-muted small">{{ imagen.autor }}</p>
+  </div>
+</div>
+
+<app-imagen-modal [imagen]="imagen" [mostrar]="mostrarModal" (cerrar$)="cerrarModal()">
+</app-imagen-modal>

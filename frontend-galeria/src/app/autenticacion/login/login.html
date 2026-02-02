@@ -1,0 +1,94 @@
+<div class="login-container">
+
+  <div class="container-fluid h-100 p-0">
+    <div class="row h-100 g-0">
+
+      <!-- COLUMNA FORMULARIO -->
+      <div class="col-lg-6 d-flex align-items-center justify-content-center bg-light position-relative overflow-hidden"
+        style="min-height: 100vh;">
+
+        <!-- Fondo animado sutil solo en el lado del formulario -->
+        <div class="background-shapes">
+          <div class="shape"></div>
+          <div class="shape"></div>
+        </div>
+
+        <div class="auth-card-wrapper z-1">
+          <div class="text-center mb-4">
+            <h1 class="login-title gradient-text">Galería de Arte</h1>
+            <p class="login-subtitle">
+              {{ esRegistro() ? 'Crea tu cuenta para empezar' : 'Bienvenido de nuevo' }}
+            </p>
+          </div>
+
+          <!-- Selector de Modo -->
+          <div class="auth-mode-selector">
+            <button class="mode-btn" [class.active]="!esRegistro()" (click)="esRegistro.set(false)">
+              Iniciar Sesión
+            </button>
+            <button class="mode-btn" [class.active]="esRegistro()" (click)="esRegistro.set(true)">
+              Registrarse
+            </button>
+          </div>
+
+          <form (ngSubmit)="esRegistro() ? registro() : login()">
+
+            @if(mensaje()) {
+            <div class="alert alert-{{ tipoMensaje() === 'exito' ? 'success' : 'danger' }}" role="alert">
+              @if(tipoMensaje() === 'exito') { <i class="bi bi-check-circle-fill"></i> }
+              @else { <i class="bi bi-exclamation-circle-fill"></i> }
+              {{ mensaje() }}
+            </div>
+            }
+
+            @if(esRegistro()) {
+            <div class="mb-3 animate-fade-in">
+              <label class="form-label">Nombre completo</label>
+              <div class="input-wrapper">
+                <input type="text" class="form-control" [(ngModel)]="nombre" name="nombre" placeholder="Ej. Juan Pérez"
+                  required>
+                <i class="bi bi-person input-icon"></i>
+              </div>
+            </div>
+            }
+
+            <div class="mb-3">
+              <label class="form-label">Correo electrónico</label>
+              <div class="input-wrapper">
+                <input type="email" class="form-control" [(ngModel)]="email" name="email"
+                  placeholder="nombre@ejemplo.com" required>
+                <i class="bi bi-envelope input-icon"></i>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Contraseña</label>
+              <div class="input-wrapper">
+                <input type="password" class="form-control" [(ngModel)]="password" name="password"
+                  placeholder="••••••••" required>
+                <i class="bi bi-lock input-icon"></i>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="cargando()">
+              {{ cargando() ? 'Procesando...' : (esRegistro() ? 'CREAR CUENTA' : 'INGRESAR') }}
+            </button>
+
+            @if(!esRegistro()){
+            <div class="text-center mt-4">
+              <a href="#" class="link-text">¿Olvidaste tu contraseña?</a>
+            </div>
+            }
+          </form>
+        </div>
+      </div>
+
+      <!-- COLUMNA IMAGEN -->
+      <div class="col-lg-6 d-none d-lg-block p-0">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp" alt="Login image"
+          class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+      </div>
+
+    </div>
+  </div>
+</div>

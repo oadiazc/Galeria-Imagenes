@@ -1,0 +1,212 @@
+/* Estilos unificados para sobre nosotros */
+#nosotros {
+  background: var(--gradient-bg) !important;
+  padding: 4rem 0 !important;
+  font-family: var(--font-primary);
+}
+
+/* Tarjeta visual moderna */
+.visual-card {
+  background: var(--gradient-primary);
+  border-radius: var(--border-radius-xl);
+  padding: 3rem;
+  box-shadow: var(--shadow-lg);
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.visual-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.visual-card-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+}
+
+.visual-year {
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.visual-divider {
+  width: 100px;
+  height: 4px;
+  background: white;
+  margin: 0 auto 1.5rem;
+  border-radius: 2px;
+}
+
+.visual-text h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.visual-text p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin: 0;
+  color: white;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Títulos */
+h1 {
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+  font-weight: 600;
+}
+
+h3 {
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+}
+
+h5 {
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+}
+
+/* Párrafos */
+p {
+  font-family: var(--font-primary);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+p strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+/* Tarjetas */
+.card {
+  background: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-primary);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-img-top {
+  transition: transform 0.3s ease;
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* Sección de hitos */
+.hitos-section {
+  background: var(--gradient-primary);
+  border-radius: var(--border-radius-xl);
+  padding: 3rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.hitos-section h2,
+.hitos-section h3,
+.hitos-section p {
+  color: white;
+  font-family: var(--font-primary);
+}
+
+/* Iconos de características */
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 700;
+}
+
+/* Imágenes */
+img {
+  transition: transform 0.3s ease;
+  border-radius: var(--border-radius-lg);
+}
+
+img:hover {
+  transform: scale(1.02);
+}
+
+/* Colores del sistema */
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+.text-dark {
+  color: var(--color-text-primary) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .hitos-section {
+    padding: 2rem 1rem;
+  }
+}

@@ -1,0 +1,107 @@
+/* Importar fuente moderna */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Variables globales del sistema de diseño */
+:root {
+  /* Tipografía */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Colores primarios */
+  --color-primary: #667eea;
+  --color-primary-dark: #5568d3;
+  --color-primary-darker: #4451b8;
+
+  /* Colores secundarios */
+  --color-secondary: #764ba2;
+  --color-accent: #f093fb;
+
+  /* Colores de texto */
+  --color-text-primary: #1a202c;
+  --color-text-secondary: #4a5568;
+  --color-text-muted: #6c757d;
+
+  /* Colores de fondo */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #f5f7fa;
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 50%, #dfe7f0 100%);
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  /* Bordes */
+  --border-radius-sm: 6px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 20px;
+  /* Premium Design Tokens */
+  --glass-bg: rgba(15, 15, 15, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+  --mesh-gradient: radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+}
+
+/* Aplicar tipografía globalmente */
+* {
+  font-family: var(--font-primary);
+}
+
+/* You can add global styles to this file, and also import other style files */
+body {
+  scroll-behavior: smooth;
+  background: var(--gradient-bg);
+  min-height: 100vh;
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+}
+
+#galeria img {
+  transition: transform 0.3s ease;
+}
+
+#galeria img:hover {
+  transform: scale(1.05);
+}
+
+/* Inicio moderno */
+.inicio {
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.inicio h1 {
+  color: #1f1f1f;
+}
+
+.inicio p {
+  font-size: 1.1rem;
+}
+
+.inicio img {
+  max-width: 90%;
+  transition: transform 0.3s ease;
+}
+
+.inicio img:hover {
+  transform: scale(1.05);
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.img-original {
+  width: 100%;
+  height: auto;
+  margin-top: 10%;
+  object-fit: contain;
+}

@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body text-center p-5">
+                    <div class="success-icon mb-4">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+                    </div>
+                    <h2 class="mb-3">¡Pago Exitoso!</h2>
+                    <p class="text-muted mb-4">
+                        Tu compra se ha procesado correctamente. Recibirás un correo de confirmación en breve.
+                    </p>
+
+                    @if (loading()) {
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                    }
+
+                    @if (orderDetails()) {
+                    <div class="alert alert-info">
+                        <h5>Detalles de la compra:</h5>
+                        <p class="mb-1"><strong>Imagen:</strong> {{ orderDetails()?.imagen?.titulo }}</p>
+                        <p class="mb-1"><strong>Precio:</strong> ${{ orderDetails()?.precio }}</p>
+                    </div>
+                    }
+
+                    <div class="d-grid gap-2">
+                        <a routerLink="/galeria" class="btn btn-primary btn-lg">
+                            Volver a la Galería
+                        </a>
+                        <a routerLink="/" class="btn btn-outline-secondary">
+                            Ir al Inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

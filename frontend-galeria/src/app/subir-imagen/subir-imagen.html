@@ -1,0 +1,98 @@
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+          <h3><i class="bi bi-cloud-upload"></i> Subir Nueva Imagen</h3>
+        </div>
+
+        <div class="card-body">
+
+          @if (!tokenValido()) {
+          <div class="alert alert-danger" role="alert">
+            Debes iniciar sesión para subir imágenes.
+            <a routerLink="/login" class="alert-link">Ir al login</a>
+          </div>
+          } @else {
+
+          <form (ngSubmit)="subirImagen()">
+
+            <!-- Título -->
+            <div class="mb-3">
+              <label class="form-label">Título *</label>
+              <input type="text" class="form-control" [(ngModel)]="titulo" name="titulo" required>
+            </div>
+
+            <!-- Autor -->
+            <div class="mb-3">
+              <label class="form-label">Autor *</label>
+              <input type="text" class="form-control" [(ngModel)]="autor" name="autor" required>
+            </div>
+
+            <!-- Descripción -->
+            <div class="mb-3">
+              <label class="form-label">Descripción</label>
+              <textarea class="form-control" [(ngModel)]="descripcion" name="descripcion" rows="3"></textarea>
+            </div>
+
+            <!-- Categoría -->
+            <div class="mb-3">
+              <label class="form-label">Categoría *</label>
+              <select class="form-control" [(ngModel)]="categoria" name="categoria" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="Paisajes">Paisajes</option>
+                <option value="Personas">Personas</option>
+                <option value="Animales">Animales</option>
+                <option value="Arquitectura">Arquitectura</option>
+                <option value="Arte Digital">Arte Digital</option>
+                <option value="Otras">Otras</option>
+              </select>
+            </div>
+
+            <!-- Imagen -->
+            <div class="mb-3">
+              <label class="form-label">Imagen *</label>
+              <input type="file" class="form-control" accept="image/*" (change)="onFileSelected($event)" required>
+
+              @if (nombreArchivo()) {
+              <small class="text-success">
+                <i class="bi bi-check-circle"></i> {{ nombreArchivo() }}
+              </small>
+              }
+            </div>
+
+            <!-- Precio y stock -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Precio ($)</label>
+                <input type="number" class="form-control" [(ngModel)]="precio" name="precio" min="0">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Stock</label>
+                <input type="number" class="form-control" [(ngModel)]="stock" name="stock" min="0">
+              </div>
+            </div>
+
+            <!-- Mensaje -->
+            @if (mensaje()) {
+            <div class="alert alert-{{ tipoMensaje() === 'exito' ? 'success' : 'danger' }}" role="alert">
+              {{ mensaje() }}
+            </div>
+            }
+
+            <!-- Botón -->
+            <button type="submit" class="btn btn-success btn-lg w-100"
+              [disabled]="cargando() || !archivoSeleccionado()">
+              {{ cargando() ? 'Subiendo...' : 'Subir Imagen' }}
+            </button>
+
+          </form>
+          }
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

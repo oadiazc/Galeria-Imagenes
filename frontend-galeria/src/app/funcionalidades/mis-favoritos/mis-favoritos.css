@@ -1,0 +1,28 @@
+.page-container {
+    min-height: calc(100vh - 120px);
+    background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    border-radius: var(--border-radius-xl);
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    box-shadow: var(--shadow-lg);
+}
+
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    display: inline-block;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--color-text-secondary);
+}
+
+.empty-state i {
+    color: var(--color-primary);
+    opacity: 0.5;
+}

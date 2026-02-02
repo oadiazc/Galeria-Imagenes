@@ -1,0 +1,99 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+      <a class="navbar-brand fw-bold d-flex align-items-center" routerLink="/">
+        <img src="Imagenes/img-tit.gif" alt="Logo" style="height: 32px; width: auto;" class="me-2">
+        Galería de Imágenes
+      </a>
+
+      <button class="navbar-toggler" type="button" (click)="toggleMenu()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" [class.show]="isMenuOpen()">
+
+        <ul class="navbar-nav ms-auto">
+          @if(!authService.currentUser()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/" (click)="isMenuOpen.set(false)">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/galeria" (click)="isMenuOpen.set(false)">Galería</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sobre-nosotros" (click)="isMenuOpen.set(false)">Sobre Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-white ms-2 px-4 shadow-sm" routerLink="/login"
+              (click)="isMenuOpen.set(false)">
+              <i class="bi bi-person-circle me-1"></i> Acceder / Registrarse
+            </a>
+          </li>
+          } @else {
+          <!-- Menú para usuarios logueados -->
+
+          <!-- Menú exclusivo ADMIN -->
+          @if(authService.currentUser()?.rol === 'admin') {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/subir-imagen" (click)="isMenuOpen.set(false)">
+              <i class="bi bi-cloud-upload"></i> Subir Imagen
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin" (click)="isMenuOpen.set(false)">
+              <i class="bi bi-gear"></i> Panel Admin
+            </a>
+          </li>
+          }
+
+          <!-- Menú exclusivo COMPRADOR -->
+          @if(authService.currentUser()?.rol === 'comprador') {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/galeria" routerLinkActive="active">Galería</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/mis-favoritos" (click)="isMenuOpen.set(false)">
+              <i class="bi bi-heart-fill text-danger me-1"></i> Favoritos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/mis-compras" (click)="isMenuOpen.set(false)" routerLinkActive="active">
+              <i class="bi bi-bag-check-fill text-secondary me-1"></i> Mis Compras
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sobre-nosotros" (click)="isMenuOpen.set(false)">Sobre Nosotros</a>
+          </li>
+          }
+
+          <!-- Dropdown Usuario -->
+          <li class="nav-item dropdown ms-2">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button"
+              data-bs-toggle="dropdown">
+              <div
+                class="user-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 32px; height: 32px;">
+                {{ authService.currentUser()?.nombre?.charAt(0)?.toUpperCase() }}
+              </div>
+              <span>{{ authService.currentUser()?.nombre }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+              <li><small class="dropdown-header text-muted">{{ authService.currentUser()?.rol === 'admin' ?
+                  'Administrador' : 'Cliente'
+                  }}</small></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item text-danger" (click)="authService.logout()" style="cursor: pointer;">
+                  <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </a></li>
+            </ul>
+          </li>
+          }
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+</div>

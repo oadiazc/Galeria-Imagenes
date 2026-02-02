@@ -1,0 +1,52 @@
+<div class="carrito-container">
+  <button class="btn-carrito" (click)="toggleCarrito()">
+    <i class="bi bi-cart"></i> <span class="badge-cantidad" *ngIf="cartService.obtenerCantidadItems() > 0">{{
+      cartService.obtenerCantidadItems()
+      }}</span>
+  </button>
+
+  <div class="carrito-panel" *ngIf="mostrarCarrito()">
+    <div class="carrito-header">
+      <h5><i class="bi bi-cart-fill me-2"></i>Carrito de Compras</h5>
+      <button class="btn-cerrar" (click)="cerrarCarrito()"></button>
+    </div>
+
+    <div *ngIf="cartService.items().length === 0" class="carrito-vacio">
+      <p>Tu carrito está vacío</p>
+    </div>
+
+    <div *ngIf="cartService.items().length > 0" class="carrito-items">
+      <div class="item-carrito" *ngFor="let item of cartService.items()">
+        <img [src]="item.url" [alt]="item.titulo" class="item-img" />
+        <div class="item-info">
+          <h6>{{ item.titulo }}</h6>
+          <p class="item-precio">{{ '$' + item.precio }}</p>
+        </div>
+        <div class="item-cantidad">
+          <button class="btn-qty" (click)="cartService.actualizarCantidad(item._id, item.cantidad - 1)">−</button>
+          <span class="qty">{{ item.cantidad }}</span>
+          <button class="btn-qty" (click)="cartService.actualizarCantidad(item._id, item.cantidad + 1)">+</button>
+        </div>
+        <button class="btn-remove" (click)="cartService.removerDelCarrito(item._id)"><i
+            class="bi bi-trash"></i></button>
+      </div>
+    </div>
+
+    <div *ngIf="cartService.items().length > 0" class="carrito-footer">
+      <!-- Mensajes de Error Internos -->
+      <div *ngIf="mensajeError()" class="alert alert-danger py-2 mb-2 small shadow-sm animate-fade-in">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ mensajeError() }}
+      </div>
+
+      <div class="total">
+        <span>Total:</span>
+        <span class="monto">{{ '$' + (cartService.obtenerTotal() | number:'1.2-2') }}</span>
+      </div>
+      <button class="btn btn-success w-100 mb-2" (click)="procesarPago()" [disabled]="procesandoPago()">
+        {{ procesandoPago() ? 'Procesando...' : 'Proceder al Pago' }}
+      </button>
+      <button class="btn btn-outline-danger w-100" (click)="cartService.limpiarCarrito()">Limpiar Carrito</button>
+    </div>
+  </div>
+</div>

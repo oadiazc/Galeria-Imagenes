@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <div class="hero-badge mb-3">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Galería de Arte Digital</span>
+      </div>
+      <h1 class="hero-title fw-bold display-3 mb-4">
+        Descubre y comparte <span class="gradient-text">arte único</span>
+      </h1>
+      <p class="hero-description lead mb-4">
+        Conectamos artistas y fotógrafos con personas que aprecian el arte.
+        Explora obras originales, encuentra inspiración y apoya a creadores de todo el mundo.
+      </p>
+      <div class="hero-stats mb-4">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Artistas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1,000+</div>
+          <div class="stat-label">Obras</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">15K+</div>
+          <div class="stat-label">Visitas</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#galeria" class="btn btn-primary btn-lg">
+          Explorar galería
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+
+      @if (imagenesCarrusel().length > 0) {
+      <div id="carruselInicio" class="carousel slide shadow-lg rounded-4 overflow-hidden" data-bs-ride="carousel"
+        data-bs-interval="3000">
+        <div class="carousel-inner">
+          @for (imagen of imagenesCarrusel(); track imagen._id; let i = $index) {
+          <div class="carousel-item" [class.active]="i === 0">
+            <img [src]="imagen.url" class="d-block w-100 object-fit-cover" [alt]="imagen.titulo"
+              style="height: 400px; object-position: center;">
+            <div class="carousel-caption d-none d-md-block glass-caption">
+              <h5>{{ imagen.titulo }}</h5>
+              <p>{{ imagen.autor }}</p>
+            </div>
+          </div>
+          }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carruselInicio" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carruselInicio" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+      } @else {
+      <!-- Fallback si no hay imágenes -->
+      <img src="/Imagenes/arte-digital.jpg" alt="Arte digital" class="img-fluid img-original rounded-4 shadow-lg" />
+      }
+
+    </div>
+  </div>
+</div>
+
+<!-- Galería de imágenes integrada en la página de inicio -->
+<app-galeria></app-galeria>

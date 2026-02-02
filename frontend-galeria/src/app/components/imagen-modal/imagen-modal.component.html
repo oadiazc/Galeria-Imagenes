@@ -1,0 +1,60 @@
+<div class="modal-backdrop" *ngIf="mostrar()" (click)="cerrar()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="btn-cerrar" (click)="cerrar()"><i class="bi bi-x-lg"></i></button>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <img [src]="imagen.url" [alt]="imagen.titulo" class="img-detail" />
+                <div class="badge-container mt-3">
+                    <span class="badge-cat">{{ imagen.categoria }}</span>
+                </div>
+            </div>
+
+            <div class="col-md-6 detalles">
+                <h2 class="titulo">{{ imagen.titulo }}</h2>
+
+                <div class="autor-info">
+                    <span class="etiqueta">Autor:</span>
+                    <span class="valor">{{ imagen.autor }}</span>
+                </div>
+
+                <div class="precio-container mt-4 mb-4">
+                    <span class="precio-label">Precio</span>
+                    <h3 class="precio">{{ '$' + (imagen.precio | number:'1.2-2') }}</h3>
+                </div>
+
+                <div class="descripcion">
+                    <h5>Descripción</h5>
+                    <p>{{ imagen.descripcion || 'Sin descripción disponible' }}</p>
+                </div>
+
+                <div class="stock-info mt-3 mb-4">
+                    <span class="etiqueta">Stock disponible:</span>
+                    <span class="stock" [class.agotado]="stockDisponible() === 0">
+                        {{ stockDisponible() > 0 ? stockDisponible() + ' unidades' : 'Agotado' }}
+                    </span>
+                </div>
+
+                <!-- Botones de Compra para todos -->
+                <div class="acciones">
+                    <button class="btn btn-primary btn-lg w-100" (click)="agregarCarrito()"
+                        [disabled]="stockDisponible() === 0">
+                        <i class="bi bi-cart-plus me-2"></i> Agregar al Carrito - {{ '$' + imagen.precio }}
+                    </button>
+                </div>
+
+                @if (agregado()) {
+                <div class="alert alert-success mt-3 mb-0">
+                    <i class="bi bi-check-circle-fill me-2"></i> Agregado al carrito exitosamente
+                </div>
+                }
+
+                @if (errorStock()) {
+                <div class="alert alert-danger mt-3 mb-0">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i> No hay suficiente stock disponible
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
